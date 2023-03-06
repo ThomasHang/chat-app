@@ -2,8 +2,11 @@ import React, { useEffect, useState, useRef } from "react";
 import ChatBar from "./ChatBar";
 import ChatBody from "./ChatBody";
 import ChatFooter from "./ChatFooter";
+import { useNavigate } from "react-router-dom";
 
 const ChatPage = ({ socket }) => {
+  const navigate = useNavigate();
+
   const [messages, setMessages] = useState([]);
   const [typingStatus, setTypingStatus] = useState("");
   const lastMessageRef = useRef(null);
@@ -20,6 +23,13 @@ const ChatPage = ({ socket }) => {
   useEffect(() => {
     socket.on("typingResponse", (data) => setTypingStatus(data));
   }, [socket]);
+
+  useEffect(() => {
+    const userName = localStorage.getItem("userName");
+    if (!userName) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <div className="chat">
