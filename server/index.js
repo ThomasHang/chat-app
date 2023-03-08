@@ -2,7 +2,7 @@
  * @Author: 储天航 1193983801@qq.com
  * @Date: 2023-03-06 09:45:49
  * @LastEditors: 储天航 1193983801@qq.com
- * @LastEditTime: 2023-03-07 16:39:21
+ * @LastEditTime: 2023-03-08 14:41:07
  * @FilePath: \chat-app\server\index.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -34,13 +34,14 @@ socketIO.on("connection", (socket) => {
 
   // 监听和在控制台打印消息
   socket.on("message", (data) => {
-    console.log(data,"dddd");
+    console.log(data, "dddd");
     socketIO.emit("messageResponse", data);
   });
 
-  socket.on("typing", (data) =>{
-   console.log(data,"data") 
-   socket.broadcast.emit("typingResponse", data)});
+  socket.on("typing", (data) => {
+    console.log(data, "data");
+    socket.broadcast.emit("typingResponse", data);
+  });
 
   // 监听新用户的加入
   socket.on("newUser", (data) => {
@@ -61,6 +62,10 @@ socketIO.on("connection", (socket) => {
     // 发送用户列表到客户端
     socketIO.emit("newUserResponse", users);
     socket.disconnect();
+  });
+  socket.on("base64file", (msg) => {
+    console.log(msg, "msg");
+    socketIO.emit("base64fileRes", msg);
   });
 });
 
