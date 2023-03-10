@@ -1,19 +1,20 @@
+/*
+ * @Author: 储天航 1193983801@qq.com
+ * @Date: 2023-03-08 13:59:45
+ * @LastEditors: 储天航 1193983801@qq.com
+ * @LastEditTime: 2023-03-09 09:25:21
+ * @FilePath: \chat-app\client_server\src\components\FilePage\index.jsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import React, { useState, useEffect } from "react";
 import UesrList from "./UesrList";
 import FileBody from "./FileBody";
+import Header from "./Header";
 
-function getBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-  });
-}
-
-export default function FilePage({ socket }) {
+function FilePage({ socket }) {
   return (
     <div style={{ display: "flex" }}>
+      <Header socket={socket} />
       <UesrList socket={socket} />
       <FileBody socket={socket} />
       {/* <form onSubmit={getPostInfo}> */}
@@ -58,3 +59,5 @@ export default function FilePage({ socket }) {
     </div>
   );
 }
+
+export default FilePage;

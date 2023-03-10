@@ -36,7 +36,7 @@ function createFileList(files) {
   for (let i = 0; i < files.length; i++) {
     fileArray.push(files[i], files[i].name);
   }
-//   还有问题
+  //   还有问题
   return fileArray;
   // return new window.FileList(fileArray);
 }
@@ -114,8 +114,20 @@ export default function FileBody({ socket }) {
     // console.log(item, "item");
     // console.log(inputRef.current.files, "inputRef.current.files");
   };
+
+  const handleLeaveChat = () => {
+    localStorage.removeItem("userName");
+    navigate("/");
+    window.location.reload();
+  };
+
   return (
     <div>
+      {/* <header className="chat__mainHeader">
+        <button className="leaveChat__btn" onClick={handleLeaveChat}>
+          退出
+        </button>
+      </header> */}
       <div>
         <div className="control">
           <label htmlFor="cover" className="cover">

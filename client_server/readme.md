@@ -6,6 +6,6 @@
 6. 优化样式
 7. 引入 taiwind
 8. 设置房间 id,私密信息传送 考虑唯一性
-9. 监听刷新按钮，如果刷新，清空 token
+9. 监听刷新操作，增加弹窗提示，如果刷新，清空 token
 
 https://blog.logrocket.com/real-time-data-transfer-with-socket-io/
