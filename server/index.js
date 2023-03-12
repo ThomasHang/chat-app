@@ -1,8 +1,8 @@
 /*
  * @Author: 储天航 1193983801@qq.com
  * @Date: 2023-03-06 09:45:49
- * @LastEditors: ThomasHang 11939838031@qq.com
- * @LastEditTime: 2023-03-11 20:58:25
+ * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
+ * @LastEditTime: 2023-03-12 18:18:32
  * @FilePath: \chat-app\server\index.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -40,6 +40,9 @@ socketIO.on("connection", (socket) => {
     socketIO.emit("messageResponse", data);
   });
 
+  // 监听房间
+  // socket.on("createRoom")
+
   socket.on("typing", (data) => {
     console.log(data, "data");
     socket.broadcast.emit("typingResponse", data);
@@ -69,6 +72,15 @@ socketIO.on("connection", (socket) => {
     console.log(msg, "msg");
     socketIO.emit("base64fileRes", msg);
   });
+  socket.on("upload", (file, callback) => {
+    console.log(file); // <Buffer 25 50 44 ...>
+
+    // save the content to the disk, for example
+    // writeFile("/tmp/upload", file, (err) => {
+    //   callback({ message: err ? "failure" : "success" });
+    // });
+  });
+
 });
 
 server.listen(PORT, () => {
