@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@douyinfe/semi-ui": "^2.30.2",
     "@reduxjs/toolkit": "^1.9.3",
     "dexie": "^3.2.3",
     "postcss": "^8.4.21",
@@ -23,6 +24,7 @@
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.1.0",
+    "autoprefixer": "^10.4.14",
     "vite": "^4.1.0"
   }
 }
