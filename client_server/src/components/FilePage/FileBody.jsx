@@ -1,53 +1,60 @@
 /*
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-03-12 13:58:39
- * @LastEditors: ThomasHang 11939838031@qq.com
- * @LastEditTime: 2023-03-13 08:15:14
+ * @LastEditors: 储天航 1193983801@qq.com
+ * @LastEditTime: 2023-03-13 16:13:23
  * @FilePath: \chat-app\client_server\src\components\FilePage\FileBody.jsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
-import React, { useRef, useState } from 'react';
-import { Upload, Button } from '@douyinfe/semi-ui';
-import { IconPlus, IconDelete, IconUpload } from '@douyinfe/semi-icons';
+import React, { useRef, useState } from "react";
+import { Upload, Button } from "@douyinfe/semi-ui";
+import { IconPlus, IconDelete, IconUpload } from "@douyinfe/semi-icons";
 
-// class ManulUploadDemo extends React.Component {
-// constructor() {
-//     super();
-//     this.manulUpload = this.manulUpload.bind(this);
-//     this.uploadRef = React.createRef();
-// }
+const getBase64 = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+
 const FileBody = ({ socket }) => {
+    console.log("socket", socket);
   const uploadRef = useRef();
   const [fileList, setFileList] = useState([]);
 
-  const manulUpload = (e) => {
-    e.preventDefault();
-    console.log(fileList, 'fileList');
-    socket.emit('upload', fileList[0].fileInstance, (status) => {
-      console.log(status);
-    });
-    // this.uploadRef.current.upload();
+  const manulUpload = () => {
+    console.log("manulUpload");
+    // e.preventDefault();
+    socket.emit("base64file", fileList);
+    socket.emit("message", fileList);
   };
 
   // render() {
-  let action = 'https://api.semi.design/upload';
+  let action = "https://api.semi.design/upload";
 
-  const onChange = ({ fileList, currentFile, event }) => {
-    console.log('onChange');
-    console.log(fileList);
+  const onChange = async ({ fileList, currentFile, event }) => {
+    console.log("onChange");
     console.log(currentFile);
-
-    for (let item of fileList) {
-      
+    const promises = [];
+    for (let i = 0; i < fileList.length; i++) {
+      const file = fileList[i].fileInstance;
+      const list = await getBase64(file);
+      promises.push(list);
     }
-    // setFileList(fileList);
 
-    // let newFileList = [...fileList]; // spread to get new array
-    // updateList(newFileList);
+    Promise.all(promises)
+      .then((results) => {
+        console.log(results);
+        setFileList(results);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const renderFileOperation = (fileItem) => (
-    <div style={{ display: 'flex', columnGap: 8, padding: '0 8px' }}>
+    <div style={{ display: "flex", columnGap: 8, padding: "0 8px" }}>
       <Button
         onClick={(e) => fileItem.onRemove()}
         icon={<IconDelete />}

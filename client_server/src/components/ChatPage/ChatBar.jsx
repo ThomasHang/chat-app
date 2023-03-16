@@ -13,12 +13,11 @@ const ChatBar = ({ socket }) => {
   return (
     <div className="chat__sidebar">
       <h2>自由聊天</h2>
-
       <div>
         <h4 className="chat__header">在线用户</h4>
         <div className="chat__users">
           {users.map((user) => (
-            <p key={user.socketID}>{user.userName}</p>
+            <p key={user.socketID}>{user.username}</p>
           ))}
         </div>
       </div>

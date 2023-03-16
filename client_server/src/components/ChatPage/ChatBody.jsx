@@ -1,6 +1,15 @@
+/*
+ * @Author: 储天航 1193983801@qq.com
+ * @Date: 2023-03-06 10:27:38
+ * @LastEditors: 储天航 1193983801@qq.com
+ * @LastEditTime: 2023-03-16 13:27:36
+ * @FilePath: \chat-app\client_server\src\components\ChatPage\ChatBody.jsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import React from "react";
 import { useNavigate } from "react-router-dom";
-const ChatBody = ({ messages, lastMessageRef, typingStatus,histroyMsg }) => {
+import { Button, Image } from "@douyinfe/semi-ui";
+const ChatBody = ({ messages, lastMessageRef, typingStatus, histroyMsg }) => {
   const navigate = useNavigate();
 
   const handleLeaveChat = () => {
@@ -8,32 +17,32 @@ const ChatBody = ({ messages, lastMessageRef, typingStatus,histroyMsg }) => {
     navigate("/");
     window.location.reload();
   };
-
- 
+  console.log(histroyMsg);
 
   return (
     <>
       <header className="chat__mainHeader">
         <p>与朋友聚会</p>
-        <button className="leaveChat__btn" onClick={handleLeaveChat}>
-          离开聊天
-        </button>
+        <Button onClick={handleLeaveChat}>离开聊天</Button>
       </header>
 
       <div className="message__container">
-        {histroyMsg.map((message) =>
+        {messages.map((message) =>
           message.name === localStorage.getItem("userName") ? (
             <div className="message__chats" key={message.id}>
               <p className="sender__name">你</p>
               <div className="message__sender">
                 <p>{message.text}</p>
+                {message.file && <Image src={message.file} />}
               </div>
             </div>
           ) : (
             <div className="message__chats" key={message.id}>
               <p>{message.name}</p>
+              {message.file && <Image src={message.file} />}
               <div className="message__recipient">
                 <p>{message.text}</p>
+                <p>{message.img}</p>
               </div>
             </div>
           )
