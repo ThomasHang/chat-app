@@ -1,8 +1,8 @@
 /*
  * @Author: 储天航 1193983801@qq.com
  * @Date: 2023-03-04 14:21:28
- * @LastEditors: 储天航 1193983801@qq.com
- * @LastEditTime: 2023-03-16 11:30:36
+ * @LastEditors: ThomasHang 11939838031@qq.com
+ * @LastEditTime: 2023-03-19 00:33:49
  * @FilePath: \ws-app\src\App.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -16,8 +16,8 @@ import "./App.css";
 
 
 function App() {
-  // const socket = socketIO.connect("http://localhost:4000");
-const socket = socketIO.connect("http://192.168.1.83:4000");
+  const socket = socketIO.connect("http://localhost:4000");
+// const socket = socketIO.connect("http://192.168.1.83:4000");
 
   const body = document.body;
   body.setAttribute("theme-mode", "dark");
