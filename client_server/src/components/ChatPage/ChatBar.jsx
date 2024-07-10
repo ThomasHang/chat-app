@@ -8,7 +8,7 @@ const ChatBar = ({ socket }) => {
       setUsers(data);
     });
     console.log(socket, "socket");
-  }, [socket, users]);
+  }, [socket]);
 
   return (
     <div className="chat__sidebar">

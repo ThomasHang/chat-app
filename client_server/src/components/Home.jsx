@@ -18,6 +18,15 @@ const Home = ({ socket }) => {
     console.log(values);
     // handleSubmit()
   };
+
+  useEffect(() => {
+    socket.on("newUserResponse", (data) => {
+      console.log(data, "用户数据");
+      setUsers(data);
+    });
+    console.log(socket, "socket");
+  }, [socket]);
+
   return (
     <div className="flex items-center justify-center h-full w-400">
       <div className="border border-slate-700 p-8 ">
@@ -46,13 +55,7 @@ const Home = ({ socket }) => {
               {/* <Form.Checkbox field="agree" noLabel>
               I have read and agree to the terms of service
             </Form.Checkbox> */}
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
+              <div class="flex justify-between items-center">
                 {/* <Button
                   theme="light"
                   type="primary"
