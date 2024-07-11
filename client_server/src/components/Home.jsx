@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Form, Button } from "@douyinfe/semi-ui";
 import { IconUser, IconKey } from "@douyinfe/semi-icons";
 import { useNavigate } from "react-router-dom";
@@ -22,7 +22,7 @@ const Home = ({ socket }) => {
   useEffect(() => {
     socket.on("newUserResponse", (data) => {
       console.log(data, "用户数据");
-      setUsers(data);
+      // setUsers(data);
     });
     console.log(socket, "socket");
   }, [socket]);

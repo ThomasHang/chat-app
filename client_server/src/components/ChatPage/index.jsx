@@ -1,11 +1,3 @@
-/*
- * @Author: 储天航 1193983801@qq.com
- * @Date: 2023-03-06 10:26:55
- * @LastEditors: 储天航 1193983801@qq.com
- * @LastEditTime: 2023-03-16 11:21:33
- * @FilePath: \chat-app\client_server\src\components\ChatPage\index.jsx
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
 import React, { useEffect, useState, useRef } from "react";
 import ChatBar from "./ChatBar";
 import ChatBody from "./ChatBody";
@@ -38,7 +30,7 @@ const ChatPage = ({ socket }) => {
   // })
   // .catch((error) => {
   //   console.log(`存储区升级失败：${error}`);
-  // });
+  // });messages
 
   db.open().catch((err) => {
     console.log(err.stack || err);
@@ -49,10 +41,11 @@ const ChatPage = ({ socket }) => {
   const [typingStatus, setTypingStatus] = useState("");
   const lastMessageRef = useRef(null);
   const [signleMessage, setSingleMessage] = useState({});
-  const [histroyMsg, setHistroyMsg] = useState([]);
+  const [historyMsg, setHistoryMsg] = useState([]);
+
   useEffect(() => {
     socket.on("messageResponse", (data) => {
-      console.log(data,"ata")
+      console.log(data, "ata");
       setMessages([...messages, data]);
       setSingleMessage(data);
     });
@@ -72,7 +65,7 @@ const ChatPage = ({ socket }) => {
         //retrieve all posts inside the database
         let allPosts = await db.posts.toArray();
         //set the posts
-        setHistroyMsg(allPosts);
+        setHistoryMsg(allPosts);
       });
     }
   }, [signleMessage]);
@@ -90,8 +83,9 @@ const ChatPage = ({ socket }) => {
 
   const getPosts = async () => {
     let allPosts = await db.posts.toArray();
+    console.log(allPosts, "allPosts");
     // setPosts(allPosts);
-    setHistroyMsg(allPosts);
+    setHistoryMsg(allPosts);
   };
   useEffect(() => {
     //get all posts from the database
@@ -107,7 +101,7 @@ const ChatPage = ({ socket }) => {
           messages={messages}
           typingStatus={typingStatus}
           lastMessageRef={lastMessageRef}
-          histroyMsg={histroyMsg}
+          historyMsg={historyMsg}
         />
         <ChatFooter socket={socket} />
       </div>

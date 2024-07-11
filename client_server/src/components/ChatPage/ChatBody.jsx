@@ -1,18 +1,10 @@
-/*
- * @Author: ThomasHang 11939838031@qq.com
- * @Date: 2023-03-16 23:56:47
- * @LastEditors: 储天航 1193983801@qq.com
- * @LastEditTime: 2023-06-01 17:09:52
- * @FilePath: /chat-app/client_server/src/components/ChatPage/ChatBody.jsx
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Image, Modal } from "@douyinfe/semi-ui";
 import { getBase64 } from "@/utils/constant";
 import FileModal from "./fileModal";
 
-const ChatBody = ({ messages, lastMessageRef, typingStatus, histroyMsg }) => {
+const ChatBody = ({ messages, lastMessageRef, typingStatus, historyMsg }) => {
   const [visible, setVisible] = useState(false);
   const [fileList, setFileList] = useState([]);
   const navigate = useNavigate();
